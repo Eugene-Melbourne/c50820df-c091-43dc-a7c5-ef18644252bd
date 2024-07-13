@@ -54,7 +54,7 @@ return [
 
         'stack' => [
             'driver' => 'stack',
-            'channels' => explode(',', env('LOG_STACK', 'single')),
+            'channels' => explode(',', myEnvString('LOG_STACK', 'single')),
             'ignore_exceptions' => false,
         ],
 

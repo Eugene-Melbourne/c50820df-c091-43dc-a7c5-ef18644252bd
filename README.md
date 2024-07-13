@@ -40,8 +40,13 @@ But it is better to go into Shell
 
     $ ./vendor/bin/sail shell
 
-from Shell we can run phpstan analyse
+### From Shell we can run
+
+phpstan analyse
 
     $ ./vendor/bin/phpstan analyse
 
+phpunit
+
+    $ vendor/bin/phpunit
 #

@@ -49,4 +49,9 @@ phpstan analyse
 phpunit
 
     $ vendor/bin/phpunit
+
+### Running The Report
+
+    php artisan report:generate
+
 #

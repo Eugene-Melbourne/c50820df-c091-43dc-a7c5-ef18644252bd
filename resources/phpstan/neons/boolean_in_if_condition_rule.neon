@@ -1,0 +1,4 @@
+services:
+  - class: PhpStanCustom\Rules\BooleanInIfConditionRule
+    tags:
+      - phpstan.rules.rule

@@ -1,0 +1,22 @@
+includes:
+    - resources/phpstan/neons/assignment_in_condition_rule.neon
+    - resources/phpstan/neons/boolean_in_if_condition_rule.neon
+
+parameters:
+
+    paths:
+        - app/
+        - config/
+        - public/
+        - routes/
+        - database/
+
+    # The level 9 is the highest level
+    level: max
+
+    ignoreErrors:
+
+
+    excludePaths:
+        analyse:
+            - 'vendor/*'

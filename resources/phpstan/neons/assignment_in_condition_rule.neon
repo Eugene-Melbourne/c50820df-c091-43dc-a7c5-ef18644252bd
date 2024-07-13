@@ -1,0 +1,4 @@
+services:
+  - class: PhpStanCustom\Rules\AssignmentInConditionRule
+    tags:
+      - phpstan.rules.rule

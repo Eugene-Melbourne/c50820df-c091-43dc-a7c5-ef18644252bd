@@ -25,9 +25,10 @@ class ExampleTest extends TestCase
         // it is important to remember that function env
         // does not convert string to int,
         // but it converts string to bool and null
-        $this->assertSame('3306', env('DB_PORT', 'a'));
-        $this->assertSame(false, env('SESSION_ENCRYPT', 'a'));
-        $this->assertSame(null, env('LOG_DEPRECATIONS_CHANNEL', 'a'));
-        $this->assertSame(null, env('NOT_EXISTANT_PARAMETER'));
+        $this->assertSame('123', env('TEST_INT', 'a'));
+        $this->assertSame(true, env('TEST_BOOL_TRUE', 'a'));
+        $this->assertSame(false, env('TEST_BOOL_FALSE', 'a'));
+        $this->assertSame(null, env('TEST_NULL', 'a'));
+        $this->assertSame(null, env('TEST_NOT_EXISTANT_PARAMETER'));
     }
 }

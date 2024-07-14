@@ -20,7 +20,7 @@ class AnswerFactory
     /**
      * @param array<int, \stdClass> $answersData
      */
-    public function makeAnswer(string $id, array $answersData): ?Answer
+    public function findAnswer(string $id, array $answersData): ?Answer
     {
         foreach ($answersData as $answerData) {
             $answer = new Answer($answerData);

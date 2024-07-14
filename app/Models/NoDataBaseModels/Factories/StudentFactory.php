@@ -21,7 +21,7 @@ class StudentFactory
     }
 
 
-    public function makeStudent(string $studentId): ?Student
+    public function findStudent(string $studentId): ?Student
     {
         $fileName = buildPath(storage_path(), 'json', 'students.json');
 

@@ -15,7 +15,7 @@ class StudentTest extends TestCase
     {
         $studentId = 'student1';
         $factory   = new StudentFactory();
-        $student   = $factory->makeStudent($studentId);
+        $student   = $factory->findStudent($studentId);
 
         $this->assertSame($studentId, $student->getId());
         $this->assertSame('Tony Stark', $student->getFullName());
@@ -27,7 +27,7 @@ class StudentTest extends TestCase
     {
         $studentId = 'studentXXX';
         $factory   = new StudentFactory();
-        $student   = $factory->makeStudent($studentId);
+        $student   = $factory->findStudent($studentId);
 
         $this->assertNull($student);
     }

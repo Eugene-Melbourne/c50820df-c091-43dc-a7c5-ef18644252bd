@@ -38,13 +38,24 @@ class Question
     }
 
 
+    /**
+     * @throws InvalidArgumentException
+     */
     public function getCorrectAnswer(): Answer
     {
-        $id          = $this->data->config->key;
+        return $this->getAnswer($this->data->config->key);
+    }
+
+
+    /**
+     * @throws InvalidArgumentException
+     */
+    public function getAnswer(string $answerId): Answer
+    {
         $answersData = $this->data->config->options;
 
         $answer = AnswerFactory::makeFactory()
-            ->makeAnswer($id, $answersData);
+            ->findAnswer($answerId, $answersData);
 
         if (is_null($answer)) {
             throw new InvalidArgumentException('Correct Answer is missing for Question - ' . $this->getId());

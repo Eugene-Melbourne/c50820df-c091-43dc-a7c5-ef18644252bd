@@ -35,7 +35,7 @@ class GenerateReport extends Command
         $studentId = $this->ask('Please enter the Student ID');
 
         /** @var ?Student $student */
-        $student = StudentFactory::makeFactory()->makeStudent($studentId);
+        $student = StudentFactory::makeFactory()->findStudent($studentId);
 
         if (is_null($student)) {
             $this->info("Student ID: {$studentId} is not valid");

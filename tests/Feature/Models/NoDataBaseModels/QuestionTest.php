@@ -15,7 +15,7 @@ class QuestionTest extends TestCase
     {
         $id       = 'numeracy16';
         $factory  = new QuestionFactory();
-        $question = $factory->makeQuestion($id);
+        $question = $factory->findQuestion($id);
 
         $this->assertSame($id, $question->getId());
         $expected      = "What is the 'median' of the following group of numbers 5, 21, 7, 18, 9?";
@@ -33,7 +33,7 @@ class QuestionTest extends TestCase
     {
         $id       = 'numeracyXXX';
         $factory  = new QuestionFactory();
-        $question = $factory->makeQuestion($id);
+        $question = $factory->findQuestion($id);
 
         $this->assertNull($question);
     }

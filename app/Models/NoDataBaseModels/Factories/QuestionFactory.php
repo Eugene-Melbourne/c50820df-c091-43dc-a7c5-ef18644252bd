@@ -21,7 +21,7 @@ class QuestionFactory
     }
 
 
-    public function makeQuestion(string $id): ?Question
+    public function findQuestion(string $id): ?Question
     {
         $fileName = buildPath(storage_path(), 'json', 'questions.json');
 

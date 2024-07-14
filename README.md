@@ -1,54 +1,63 @@
 
+
 ## Installing Development Environment
 
 
-For the current project I installed the Laravel Sail on Windows
+For the current project I installed the **Laravel Sail on Windows**
 The detailed instruction provided in here: https://laravel.com/docs/11.x/installation#sail-on-windows
 
-I chose to work in Windows PowerShell instead of Windows Terminal.
+I chose to work in *Windows PowerShell*, *Windows Terminal* is also a good option.
 
 I chose to install Ubuntu distribution of WSL
 
-    $ wsl --install -d Ubuntu
-    $ wsl --set-default Ubuntu
+    wsl --install -d Ubuntu
+    wsl --set-default Ubuntu
 sign in into ubuntu wsl
 
-    $ wsl
+    wsl
 install laravel sail
 
-    $ curl -s https://laravel.build/acer-test | bash
+    curl -s https://laravel.build/acer-test | bash
 start the sail
 
-    $ cd acer-test
-    $ ./vendor/bin/sail up
+    cd acer-test
+    ./vendor/bin/sail up
 
 Checks
   -  web application can be checked in a browser http://localhost or http://127.0.0.1
-  -  and database can be accessed in the 127.0.0.1:3306
+  -  and the database can be accessed in the `127.0.0.1:3306`
 
 ## Running commands
 
 
 composer install
 
-    $ ./vendor/bin/sail composer install
+    ./vendor/bin/sail composer install
+
 artisan migrate
 
-    $ ./vendor/bin/sail artisan migrate
+    ./vendor/bin/sail artisan migrate
 
 But it is better to go into Shell
 
-    $ ./vendor/bin/sail shell
+    ./vendor/bin/sail shell
 
-### From Shell we can run
+once in Shell you will work under the `sail` user account
+and the project folder would be `/var/www/html`
 
-phpstan analyse
+### From Shell we can run commands
 
-    $ ./vendor/bin/phpstan analyse
+- check php version
 
-phpunit
+      php -v
 
-    $ vendor/bin/phpunit
+- execute phpstan analyse process
+
+      ./vendor/bin/phpstan analyse
+
+- execute phpunit test suite
+
+      vendor/bin/phpunit
 
 ### Running The Report
 

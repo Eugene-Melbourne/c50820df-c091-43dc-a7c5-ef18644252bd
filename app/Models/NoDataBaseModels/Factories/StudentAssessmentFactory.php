@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\NoDataBaseModels\Factories;
 
+use App\Models\NoDataBaseModels\Student;
 use App\Models\NoDataBaseModels\StudentAssessment;
 use function app;
 use function buildPath;
@@ -40,5 +41,31 @@ class StudentAssessmentFactory
         }
 
         return null;
+    }
+
+
+    /**
+     * @return array <int, StudentAssessment>
+     */
+    public function findStudentAssessmentsByStudent(Student $student): array
+    {
+        $fileName = buildPath(storage_path(), 'json', 'student-responses.json');
+
+        /** @var array<int,\stdClass> $studentAssessments */
+        $studentAssessments = json_decode(
+            json: myFileGetContents($fileName),
+            associative: false,
+            flags: JSON_THROW_ON_ERROR,
+        );
+
+        $result = [];
+        foreach ($studentAssessments as $studentAssessmentData) {
+            $studentAssessment = new StudentAssessment($studentAssessmentData);
+            if ($student->getId() === $studentAssessment->getStudent()->getId()) {
+                $result[] = $studentAssessment;
+            }
+        }
+
+        return $result;
     }
 }

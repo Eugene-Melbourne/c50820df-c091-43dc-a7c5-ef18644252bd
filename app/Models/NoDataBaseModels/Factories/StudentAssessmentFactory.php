@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace App\Models\NoDataBaseModels\Factories;
 
+use App\Models\NoDataBaseModels\Collections\StudentAssessmentCollection;
 use App\Models\NoDataBaseModels\Student;
 use App\Models\NoDataBaseModels\StudentAssessment;
 use function app;
-use function buildPath;
-use function json_decode;
-use function myFileGetContents;
-use function storage_path;
 
 class StudentAssessmentFactory
 {
@@ -24,17 +21,9 @@ class StudentAssessmentFactory
 
     public function findStudentAssessment(string $id): ?StudentAssessment
     {
-        $fileName = buildPath(storage_path(), 'json', 'student-responses.json');
+        $studentAssessments = StudentAssessmentCollection::makeCollection()->getCollection();
 
-        /** @var array<int,\stdClass> $studentAssessments */
-        $studentAssessments = json_decode(
-            json: myFileGetContents($fileName),
-            associative: false,
-            flags: JSON_THROW_ON_ERROR,
-        );
-
-        foreach ($studentAssessments as $studentAssessmentData) {
-            $studentAssessment = new StudentAssessment($studentAssessmentData);
+        foreach ($studentAssessments as $studentAssessment) {
             if ($id === $studentAssessment->getId()) {
                 return $studentAssessment;
             }
@@ -49,18 +38,10 @@ class StudentAssessmentFactory
      */
     public function findStudentAssessmentsByStudent(Student $student): array
     {
-        $fileName = buildPath(storage_path(), 'json', 'student-responses.json');
-
-        /** @var array<int,\stdClass> $studentAssessments */
-        $studentAssessments = json_decode(
-            json: myFileGetContents($fileName),
-            associative: false,
-            flags: JSON_THROW_ON_ERROR,
-        );
+        $studentAssessments = StudentAssessmentCollection::makeCollection()->getCollection();
 
         $result = [];
-        foreach ($studentAssessments as $studentAssessmentData) {
-            $studentAssessment = new StudentAssessment($studentAssessmentData);
+        foreach ($studentAssessments as $studentAssessment) {
             if ($student->getId() === $studentAssessment->getStudent()->getId()) {
                 $result[] = $studentAssessment;
             }

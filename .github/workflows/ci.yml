@@ -1,6 +1,6 @@
 name: CI
 run-name: ${{ github.actor }} CI tests
-on:
+#on: [push]
 workflow_dispatch:
 jobs:
     phpunit:

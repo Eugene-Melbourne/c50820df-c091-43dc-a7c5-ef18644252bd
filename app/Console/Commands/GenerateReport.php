@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Brokers\Reports\ReportType;
+use App\Models\NoDataBaseModels\ReportType;
 use Illuminate\Console\Command;
 
 class GenerateReport extends Command

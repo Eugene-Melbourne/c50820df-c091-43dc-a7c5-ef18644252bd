@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Brokers\Reports;
 
+use App\Models\NoDataBaseModels\ReportType;
 use App\Brokers\Reports\Drivers\DiagnosticReport;
 use App\Brokers\Reports\Drivers\FeedbackReport;
 use App\Brokers\Reports\Drivers\ProgressReport;
 use InvalidArgumentException;
+use function app;
 
 class ReportProcessorFactory
 {

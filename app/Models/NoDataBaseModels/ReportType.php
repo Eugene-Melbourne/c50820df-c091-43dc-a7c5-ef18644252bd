@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Brokers\Reports;
+namespace App\Models\NoDataBaseModels;
 
+use App\Brokers\Reports\ReportProcessorContract;
+use App\Brokers\Reports\ReportProcessorFactory;
 use InvalidArgumentException;
 use function app;
 

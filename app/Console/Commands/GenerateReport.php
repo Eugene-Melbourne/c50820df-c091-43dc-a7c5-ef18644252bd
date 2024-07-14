@@ -47,11 +47,13 @@ class GenerateReport extends Command
             '1'
         );
 
-        // todo: Add report generation logic here
         $reportType = new ReportType($reportTypeKey);
 
-        // Output
         $this->info("Generating {$reportType->getLabel()} report for Student ID: {$studentId}");
+
+        $output = $reportType->getDriver()->process($studentId)->getOutput();
+
+        $this->info($output);
 
         return 0;
     }

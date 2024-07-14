@@ -7,4 +7,9 @@ namespace App\Brokers\Reports;
 interface ReportProcessorContract
 {
 
+
+    public function process(string $studentId): self;
+
+
+    public function getOutput(): string;
 }

@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Tests\Feature\Console\Commands;
 
 use App\Brokers\Reports\Drivers\DiagnosticReport;
-use App\Brokers\Reports\ReportProcessorFactory;
-use App\Models\NoDataBaseModels\ReportType;
 use App\Models\NoDataBaseModels\Student;
 use Mockery;
 use Tests\TestCase;
@@ -38,17 +36,6 @@ class GenerateReportTest extends TestCase
             ->andReturnSelf()
             ->shouldReceive('getOutput')->once()->with()->andReturn('XXX');
         app()->instance(DiagnosticReport::class, $processor);
-
-        // Mock Factory
-        $factory = Mockery::mock(ReportProcessorFactory::class);
-        $factory
-            ->shouldReceive('makeDriver')
-            ->times(1)
-            ->with(Mockery::on(function (ReportType $argument): bool {
-                    return $argument->getKey() === ReportType::KEY_DIAGNOSTIC;
-                }))
-            ->andReturn($processor);
-        app()->instance(ReportProcessorFactory::class, $factory);
 
         // Mock user input
         $this->artisan('report:generate')

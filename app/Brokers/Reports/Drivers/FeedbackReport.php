@@ -40,8 +40,6 @@ class FeedbackReport extends AbstractReportProcessor
             }
         }
 
-        $mostRecent = null;
-
         return [
             'student_name' => $student->getFullName(),
             'completed_at' => $mostRecent?->getCompletedAt()?->format('jS F Y h:i A'),

@@ -6,6 +6,10 @@ on: [push]
 jobs:
   phpunit:
     runs-on: ubuntu-latest
+    env:
+      DB_PORT: 3306
+      SESSION_ENCRYPT: false
+      LOG_DEPRECATIONS_CHANNEL: null
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

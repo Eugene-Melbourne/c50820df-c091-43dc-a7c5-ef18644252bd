@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Brokers\Reports\Drivers;
 
 use App\Brokers\Reports\AbstractReportProcessor;
+use App\Models\NoDataBaseModels\Student;
 use Override;
 
 class DiagnosticReport extends AbstractReportProcessor
@@ -19,10 +20,10 @@ class DiagnosticReport extends AbstractReportProcessor
 
 
     #[Override]
-    protected function getReportData(string $studentId): array
+    protected function getReportData(Student $student): array
     {
         return [
-            'student_name' => 'Tony Stark',
+            'student_name' => $student->getFullName(),
         ];
     }
 }

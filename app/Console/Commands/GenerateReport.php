@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Models\NoDataBaseModels\Factories\StudentFactory;
 use App\Models\NoDataBaseModels\ReportType;
+use App\Models\NoDataBaseModels\Student;
 use Illuminate\Console\Command;
 
 class GenerateReport extends Command
@@ -23,12 +25,23 @@ class GenerateReport extends Command
 
     /**
      * Execute the console command.
+     * Return 1 to indicate an error
+     * Return 0 to indicate success
      */
     public function handle(): int
     {
         // Step 1: Ask for Student ID
         /** @var string $studentId */
         $studentId = $this->ask('Please enter the Student ID');
+
+        /** @var ?Student $student */
+        $student = StudentFactory::makeFactory()->makeStudent($studentId);
+
+        if (is_null($student)) {
+            $this->info("Student ID: {$studentId} is not valid");
+
+            return 1;
+        }
 
         // Step 2: Ask for Report Type
         /** @var array<string, string> $options */
@@ -49,9 +62,9 @@ class GenerateReport extends Command
 
         $reportType = new ReportType($reportTypeKey);
 
-        $this->info("Generating {$reportType->getLabel()} report for Student ID: {$studentId}");
+        $this->info("Generating {$reportType->getLabel()} report for Student ID: {$student->getId()}");
 
-        $output = $reportType->getDriver()->process($studentId)->getOutput();
+        $output = $reportType->getDriver()->process($student)->getOutput();
 
         $this->info($output);
 

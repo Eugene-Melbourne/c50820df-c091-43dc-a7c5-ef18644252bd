@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Brokers\Reports;
 
+use App\Models\NoDataBaseModels\Student;
 use Override;
 use function view;
 
@@ -19,7 +20,7 @@ abstract class AbstractReportProcessor implements ReportProcessorContract
     /**
      * @return array<string, mixed>
      */
-    abstract protected function getReportData(string $studentId): array;
+    abstract protected function getReportData(Student $student): array;
 
 
     #[Override]
@@ -30,12 +31,12 @@ abstract class AbstractReportProcessor implements ReportProcessorContract
 
 
     #[Override]
-    public function process(string $studentId): ReportProcessorContract
+    public function process(Student $student): ReportProcessorContract
     {
 
         $this->output = view(
             view: $this->getViewName(),
-            data: $this->getReportData($studentId),
+            data: $this->getReportData($student),
             )
             ->render();
 

@@ -14,7 +14,7 @@ class DiagnosticReport extends AbstractReportProcessor
     #[Override]
     protected function getViewName(): string
     {
-        return 'reports.diagnostic';
+        return 'report_templates.diagnostic';
     }
 
 

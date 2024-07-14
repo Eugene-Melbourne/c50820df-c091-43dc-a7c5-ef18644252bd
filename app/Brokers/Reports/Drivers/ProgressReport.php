@@ -14,7 +14,7 @@ class ProgressReport extends AbstractReportProcessor
     #[Override]
     protected function getViewName(): string
     {
-        return 'reports.progress';
+        return 'report_templates.progress';
     }
 
 

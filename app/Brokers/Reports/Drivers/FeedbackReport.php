@@ -14,7 +14,7 @@ class FeedbackReport extends AbstractReportProcessor
     #[Override]
     protected function getViewName(): string
     {
-        return 'reports.feedback';
+        return 'report_templates.feedback';
     }
 
 

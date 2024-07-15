@@ -23,16 +23,17 @@ class FeedbackReport extends AbstractReportProcessor
     #[Override]
     protected function getReportData(Student $student): array
     {
-        /** @var ?StudentAssessment $mostRecent */
-        $mostRecent = $student
+        /** @var ?StudentAssessment $mostRecentStudentAssessment */
+        $mostRecentStudentAssessment = $student
             ->getStudentAssessments()
             ->filter(fn($assessment) => !is_null($assessment->getCompletedAt()))
             ->sortByDesc(fn($assessment) => $assessment->getCompletedAt())
             ->first();
 
         return [
-            'student_name' => $student->getFullName(),
-            'completed_at' => $mostRecent?->getCompletedAt()?->format('jS F Y h:i A'),
+            'student_name'    => $student->getFullName(),
+            'completed_at'    => $mostRecentStudentAssessment?->getCompletedAt()?->format('jS F Y h:i A'),
+            'assessment_name' => $mostRecentStudentAssessment?->getAssessment()?->getName(),
         ];
     }
 }

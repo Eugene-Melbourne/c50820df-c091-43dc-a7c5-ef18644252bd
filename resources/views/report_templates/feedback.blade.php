@@ -1,5 +1,5 @@
 @if (!is_null($completed_at))
-{{ $student_name }} recently completed Numeracy assessment on {{ $completed_at }}
+{{ $student_name }} recently completed {{ $assessment_name }} assessment on {{ $completed_at }}
 He got 15 questions right out of 16. Feedback for wrong answers given below
 
 Question: What is the 'median' of the following group of numbers 5, 21, 7, 18, 9?

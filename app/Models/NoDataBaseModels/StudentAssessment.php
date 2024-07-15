@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Models\NoDataBaseModels;
 
+use App\Models\NoDataBaseModels\Factories\AssessmentFactory;
 use App\Models\NoDataBaseModels\Factories\StudentFactory;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use InvalidArgumentException;
 use stdClass;
 
@@ -79,16 +81,29 @@ class StudentAssessment
 
 
     /**
-     * @return array<int, StudentResponse>
+     * @return Collection<int, StudentResponse>
      */
-    public function getStudentResponses(): array
+    public function getStudentResponses(): Collection
     {
-        $result               = [];
+        $result               = new Collection();
         $studentResponsesData = $this->data->responses;
         foreach ($studentResponsesData as $studentResponseData) {
-            $result[] = new StudentResponse($studentResponseData);
+            $result->add(new StudentResponse($studentResponseData));
         }
 
         return $result;
+    }
+
+
+    public function getAssessment(): Assessment
+    {
+        $assessment = AssessmentFactory::makeFactory()
+            ->findAssessment($this->data->assessmentId);
+
+        if (is_null($assessment)) {
+            throw new InvalidArgumentException('Assessment is missing for StudentResponse - ' . $this->getId());
+        }
+
+        return $assessment;
     }
 }

@@ -41,4 +41,10 @@ class StudentResponse
     {
         return $this->getQuestion()->getAnswer($this->data->response);
     }
+
+
+    public function isCorrectAnswer(): bool
+    {
+        return $this->getStudentAnswer()->getId() === $this->getQuestion()->getCorrectAnswer()->getId();
+    }
 }

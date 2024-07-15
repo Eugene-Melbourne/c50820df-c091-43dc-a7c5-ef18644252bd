@@ -106,4 +106,12 @@ class StudentAssessment
 
         return $assessment;
     }
+
+
+    public function getCorrectAnswersCount(): int
+    {
+        return $this->getStudentResponses()
+                ->filter(fn(StudentResponse $studentResponse): bool => $studentResponse->isCorrectAnswer())
+                ->count();
+    }
 }

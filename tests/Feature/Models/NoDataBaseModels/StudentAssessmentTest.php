@@ -23,6 +23,7 @@ class StudentAssessmentTest extends TestCase
         $this->assertSame('2019-12-14 10:31:00', $studentAssessment->getAssignedAt()->toDateTimeString());
         $this->assertSame('2019-12-16 10:00:00', $studentAssessment->getStartedAt()->toDateTimeString());
         $this->assertSame('2019-12-16 10:46:00', $studentAssessment->getCompletedAt()->toDateTimeString());
+        $this->assertSame(6, $studentAssessment->getCorrectAnswersCount());
 
         $studentResponse = $studentAssessment->getStudentResponses()->first();
         $question        = $studentResponse->getQuestion();

@@ -1,5 +1,5 @@
-{{ $student_name }} recently completed Numeracy assessment on 16th December 2021 10:46 AM
-He got 15 questions right out of 16. Details by strand given below:
+{!! $student_name !!} recently completed {!! $assessment_name !!} assessment on {!! $completed_at !!}
+He got {!! $correct_answers_count !!} questions right out of {!! $total_questions_count !!}. Details by strand given below:
 
 Numeracy and Algebra: 5 out of 5 correct
 Measurement and Geometry: 7 out of 7 correct

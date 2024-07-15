@@ -25,6 +25,7 @@ class AnswerFactory
         foreach ($answersData as $answerData) {
             $answer = new Answer($answerData);
             if ($id === $answer->getId()) {
+
                 return $answer;
             }
         }

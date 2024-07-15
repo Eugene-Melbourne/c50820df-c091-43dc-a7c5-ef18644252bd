@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace App\Models\NoDataBaseModels\Factories;
 
+use App\Models\NoDataBaseModels\Collections\QuestionCollection;
 use App\Models\NoDataBaseModels\Question;
 use function app;
-use function buildPath;
-use function json_decode;
-use function myFileGetContents;
-use function storage_path;
 
 class QuestionFactory
 {
@@ -23,22 +20,11 @@ class QuestionFactory
 
     public function findQuestion(string $id): ?Question
     {
-        $fileName = buildPath(storage_path(), 'json', 'questions.json');
-
-        /** @var array<int,\stdClass> $questions */
-        $questions = json_decode(
-            json: myFileGetContents($fileName),
-            associative: false,
-            flags: JSON_THROW_ON_ERROR,
-        );
-
-        foreach ($questions as $questionData) {
-            $question = new Question($questionData);
-            if ($id === $question->getId()) {
-                return $question;
-            }
-        }
-
-        return null;
+        return QuestionCollection::makeCollection()
+                ->getCollection()
+                ->filter(function (Question $question) use ($id): bool {
+                    return $question->getId() === $id;
+                })
+                ->first();
     }
 }

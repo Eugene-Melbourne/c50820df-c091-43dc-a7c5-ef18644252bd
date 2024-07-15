@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace App\Models\NoDataBaseModels\Factories;
 
+use App\Models\NoDataBaseModels\Collections\StudentCollection;
 use App\Models\NoDataBaseModels\Student;
 use function app;
-use function buildPath;
-use function json_decode;
-use function myFileGetContents;
-use function storage_path;
 
 class StudentFactory
 {
@@ -21,24 +18,13 @@ class StudentFactory
     }
 
 
-    public function findStudent(string $studentId): ?Student
+    public function findStudent(string $id): ?Student
     {
-        $fileName = buildPath(storage_path(), 'json', 'students.json');
-
-        /** @var array<int,\stdClass> $students */
-        $students = json_decode(
-            json: myFileGetContents($fileName),
-            associative: false,
-            flags: JSON_THROW_ON_ERROR,
-        );
-
-        foreach ($students as $studentData) {
-            $student = new Student($studentData);
-            if ($studentId === $student->getId()) {
-                return $student;
-            }
-        }
-
-        return null;
+        return StudentCollection::makeCollection()
+                ->getCollection()
+                ->filter(function (Student $student) use ($id): bool {
+                    return $student->getId() === $id;
+                })
+                ->first();
     }
 }

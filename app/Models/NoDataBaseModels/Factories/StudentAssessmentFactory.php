@@ -7,6 +7,7 @@ namespace App\Models\NoDataBaseModels\Factories;
 use App\Models\NoDataBaseModels\Collections\StudentAssessmentCollection;
 use App\Models\NoDataBaseModels\Student;
 use App\Models\NoDataBaseModels\StudentAssessment;
+use Illuminate\Support\Collection;
 use function app;
 
 class StudentAssessmentFactory
@@ -21,32 +22,24 @@ class StudentAssessmentFactory
 
     public function findStudentAssessment(string $id): ?StudentAssessment
     {
-        $studentAssessments = StudentAssessmentCollection::makeCollection()->getCollection();
-
-        foreach ($studentAssessments as $studentAssessment) {
-            if ($id === $studentAssessment->getId()) {
-                return $studentAssessment;
-            }
-        }
-
-        return null;
+        return StudentAssessmentCollection::makeCollection()
+                ->getCollection()
+                ->filter(function (StudentAssessment $studentAssessment) use ($id): bool {
+                    return $studentAssessment->getId() === $id;
+                })
+                ->first();
     }
 
 
     /**
-     * @return array <int, StudentAssessment>
+     * @return Collection <int, StudentAssessment>
      */
-    public function findStudentAssessmentsByStudent(Student $student): array
+    public function findStudentAssessmentsByStudent(Student $student): Collection
     {
-        $studentAssessments = StudentAssessmentCollection::makeCollection()->getCollection();
-
-        $result = [];
-        foreach ($studentAssessments as $studentAssessment) {
-            if ($student->getId() === $studentAssessment->getStudent()->getId()) {
-                $result[] = $studentAssessment;
-            }
-        }
-
-        return $result;
+        return StudentAssessmentCollection::makeCollection()
+                ->getCollection()
+                ->filter(function (StudentAssessment $studentAssessment) use ($student): bool {
+                    return $student->getId() === $studentAssessment->getStudent()->getId();
+                });
     }
 }

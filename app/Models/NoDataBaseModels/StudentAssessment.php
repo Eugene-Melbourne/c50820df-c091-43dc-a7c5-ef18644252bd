@@ -110,8 +110,20 @@ class StudentAssessment
 
     public function getCorrectAnswersCount(): int
     {
-        return $this->getStudentResponses()
+        return $this
+                ->getStudentResponses()
                 ->filter(fn(StudentResponse $studentResponse): bool => $studentResponse->isCorrectAnswer())
                 ->count();
+    }
+
+
+    /**
+     * @return Collection<int, StudentResponse>
+     */
+    public function getIncorrectStudentResponses(): Collection
+    {
+        return $this
+                ->getStudentResponses()
+                ->filter(fn(StudentResponse $studentResponse): bool => !$studentResponse->isCorrectAnswer());
     }
 }

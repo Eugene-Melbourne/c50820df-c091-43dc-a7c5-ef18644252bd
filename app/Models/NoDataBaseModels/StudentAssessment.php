@@ -50,13 +50,18 @@ class StudentAssessment
     }
 
 
-    public function getAssignedAt(): ?Carbon
+    public function getAssignedAt(): Carbon
     {
         $datetime = $this->data->assigned ?? null;
         if (is_null($datetime)) {
-            return null;
+            throw new InvalidArgumentException('Assigned date is missing for StudentResponse - ' . $this->getId());
         }
-        return Carbon::createFromFormat(self::DATETIME_FORMAT, $datetime, 'UTC');
+        $result = Carbon::createFromFormat(self::DATETIME_FORMAT, $datetime, 'UTC');
+        if (is_null($result)) {
+            throw new InvalidArgumentException('Assigned date is empty for StudentResponse - ' . $this->getId());
+        }
+
+        return $result;
     }
 
 

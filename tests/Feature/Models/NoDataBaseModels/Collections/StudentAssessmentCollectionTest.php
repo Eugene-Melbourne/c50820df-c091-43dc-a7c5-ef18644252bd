@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\Models\NoDataBaseModels;
+namespace Tests\Feature\Models\NoDataBaseModels\Collections;
 
 use App\Models\NoDataBaseModels\Collections\StudentAssessmentCollection;
 use Tests\TestCase;

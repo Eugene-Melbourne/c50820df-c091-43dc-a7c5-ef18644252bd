@@ -38,6 +38,12 @@ class Question
     }
 
 
+    public function getStrand(): string
+    {
+        return $this->data->strand;
+    }
+
+
     /**
      * @throws InvalidArgumentException
      */
